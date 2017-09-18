@@ -33,12 +33,12 @@ func (c *Config) Apply() error {
 	return nil
 }
 
-func (c *Config) Update() error {
+func (c *Config) Update() (bool, error) {
 	if c.disabled {
-		return nil
+		return true, nil
 	}
 	if c.tempDisable.After(time.Now()) {
-		return nil
+		return false, nil
 	}
 	return protocols.Run(c.Protocol, c)
 }

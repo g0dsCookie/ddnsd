@@ -20,12 +20,12 @@ type Config interface {
 	TempDisable()
 }
 
-func Run(p Protocol, c Config) error {
+func Run(p Protocol, c Config) (bool, error) {
 	switch p {
 	case ProtocolDynDNS2:
 		return dyndns2.Update(c)
 
 	default:
-		return errors.New("unknown protocol " + string(p))
+		return true, errors.New("unknown protocol " + string(p))
 	}
 }

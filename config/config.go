@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/xml"
 	"io/ioutil"
+	"time"
 
 	"github.com/g0dsCookie/ddnsd/log"
 	"github.com/g0dsCookie/ddnsd/updater"
@@ -15,7 +16,7 @@ type Config struct {
 }
 
 type GlobalConfig struct {
-	Interval int64         `xml:"interval"`
+	Interval time.Duration `xml:"interval"`
 	Log      log.LogConfig `xml:"log"`
 }
 

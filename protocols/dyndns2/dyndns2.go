@@ -112,7 +112,7 @@ func update(baseURL string, hosts []string) error {
 	return nil
 }
 
-func Update(c Config) error {
+func Update(c Config) (bool, error) {
 	username, password := c.GetCredentials()
 	hosts := c.GetHosts()
 	updateURL := c.GetUpdateURL()
@@ -131,19 +131,29 @@ func Update(c Config) error {
 			switch err.(type) {
 			case disable:
 				c.Disable()
+				return true, nil
 			case tempDisable:
 				c.TempDisable()
+				return false, nil
 			}
-			return err
+			return false, err
 		}
 		hosts = hosts[20:]
 	}
 
 	if len(hosts) > 0 {
 		if err := update(url.String(), hosts); err != nil {
-			return err
+			switch err.(type) {
+			case disable:
+				c.Disable()
+				return true, nil
+			case tempDisable:
+				c.TempDisable()
+				return false, nil
+			}
+			return false, err
 		}
 	}
 
-	return nil
+	return false, nil
 }
