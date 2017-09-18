@@ -63,7 +63,7 @@ var logFacilityMap = map[LogFacility]syslog.Priority{
 	LogFacilityMail:     syslog.LOG_MAIL,
 	LogFacilityDaemon:   syslog.LOG_DAEMON,
 	LogFacilityAuth:     syslog.LOG_AUTH,
-	LogTargetSyslog:     syslog.LOG_SYSLOG,
+	LogFacilitySyslog:   syslog.LOG_SYSLOG,
 	LogFacilityLPR:      syslog.LOG_LPR,
 	LogFacilityNews:     syslog.LOG_NEWS,
 	LogFacilityCron:     syslog.LOG_CRON,
