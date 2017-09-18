@@ -1,9 +1,13 @@
 package log
 
+// +build !windows,!nacl,!plan9
+
 import (
 	"errors"
 	"log/syslog"
 )
+
+const LogTargetSyslog LogTarget = "syslog"
 
 type sysLogger struct {
 	logstream *syslog.Writer

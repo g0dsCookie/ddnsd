@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+const LogTargetFile LogTarget = "file"
+
 type LoggerNotAvailable struct{}
 
 func (e LoggerNotAvailable) Error() string { return "logger is not available" }

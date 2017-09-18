@@ -8,11 +8,6 @@ import (
 
 type LogTarget string
 
-const (
-	LogTargetFile   LogTarget = "file"
-	LogTargetSyslog           = "syslog"
-)
-
 type LogSeverity string
 
 const (
