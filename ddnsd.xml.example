@@ -1,0 +1,65 @@
+<ddnsd>
+	<!-- Global/Daemon configuration -->
+	<global>
+		<!-- Update interval in seconds -->
+		<interval>50</interval>
+		<!-- Configure logging -->
+		<log>
+			<!-- Define the log target. Available targets: syslog, file -->
+			<target>syslog</target>
+			<!-- Only log messages to this severity. Available severities (in order): emergency, alert, critical, error, warning, notice, info, debug-->
+			<severity>warning</severity>
+
+			<!-- LogTarget: file -->
+			<!-- Defines the output file for logging. -->
+			<file>ddnsd.log</file>
+
+			<!-- LogTarget: syslog -->
+			<!-- Set the syslog facility. Available facilities: kern, user, mail, daemon, auth, syslog, lpr, news, cron, authpriv, ftp, local0 .. local7	-->
+			<facility>local7</facility>
+			<!--
+				Set the syslog address. Format: network://address
+				Available networks:
+					- unix, unixpacket (for stream sockets)
+					- unixgram
+					- tcp, tcp4 (IPv4 only), tcp6 (IPv6 only)
+					- udp, udp4 (IPv4 only, udp6 (IPv6 only)
+
+				Examples:
+					unix:///dev/log
+					tcp://127.0.0.1:514
+					tcp6://[::1]:514
+					udp://[::1]:514
+					udp4://127.0.0.1:514
+			-->
+			<address>unixgram:///dev/log</address>
+			<!-- Set the syslog tag -->
+			<tag>ddnsd</tag>
+		</log>
+	</global>
+
+	<!--
+		Client configurations may occur multiple times and defines the
+		dyndns addresses to be updated.
+
+		Attributes:
+			name - defines the log identifier for this client configuration
+			protocol - defines the dyndns protocol to use. Available: dyndns2
+	-->
+	<client name="example" protocol="dyndns2">
+		<!-- The update address without protocol definition-->
+		<server>members.dyndns.org</server>
+		<!--
+			Credentials to use for authentication
+
+			Attributes:
+				username - set the username
+				password - set the password
+		-->
+		<credentials username="user1" password="p@ssword"/>
+
+		<!-- Define the hosts to update. This option may occur multiple times. -->
+		<host>example.org</host>
+		<host>www.example.org</host>
+	</client>
+</ddnsd>
